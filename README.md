@@ -135,12 +135,24 @@ Rect rectFeature3(500 + 200 + edgeThick * 2, 200, 200, 100);
 저장할 파일의 이름을 입력받고 Drawing 영역의 이미지를 저장한다.
 
 ```
-
+else if (rectSave.contains(Point(x, y)))
+		{
+			string filename;
+			cout << "저장할 파일명 입력 : ";
+			getline(cin, filename);
+			if (filename == "cancel") break;
+			bool saving = imwrite(filename, based(drawingSpace));
+			if (saving) cout << filename << " 파일이 저장됨." << endl;
+			else cout << filename << " 파일 저장실패." << endl;
+		}
 ```
 
-#### 무게 중심 계산 (`Center`)
+#### 이미지 불러오기 (`Load`)
 
-가장 큰 외곽선의 무게 중심을 계산하고, 이를 그림 영역의 백분율로 출력합니다.
+불러올 파일 이름을 입력받고 Drawing 영역에 이미지를 표시한다.
+```
+
+```
 
 #### 외곽선 검출 (`Contours`)
 
