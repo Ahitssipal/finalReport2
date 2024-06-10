@@ -136,22 +136,33 @@ Rect rectFeature3(500 + 200 + edgeThick * 2, 200, 200, 100);
 
 ```
 else if (rectSave.contains(Point(x, y)))
-		{
+{
 			string filename;
 			cout << "저장할 파일명 입력 : ";
 			getline(cin, filename);
 			if (filename == "cancel") break;
 			bool saving = imwrite(filename, based(drawingSpace));
 			if (saving) cout << filename << " 파일이 저장됨." << endl;
-			else cout << filename << " 파일 저장실패." << endl;
-		}
+else cout << filename << " 파일 저장실패." << endl;
+}
 ```
 
 #### 이미지 불러오기 (`Load`)
 
 불러올 파일 이름을 입력받고 Drawing 영역에 이미지를 표시한다.
 ```
-
+else if (rectLoad.contains(Point(x, y)))
+		{
+			string loadFileName;
+			cout << "불러올 파일명을 입력 : ";
+			getline(cin, loadFileName);
+			if (loadFileName == "cancel") break;
+			Mat temp = imread(loadFileName, IMREAD_COLOR);
+			if (temp.empty()) cout << loadFileName << " 불러오기 실패." << endl;
+			else cout << loadFileName << " 불러옴." << endl;
+			temp.copyTo(based(drawingSpace));
+			imshow("numberWindow", based);
+		}
 ```
 
 #### 외곽선 검출 (`Contours`)
