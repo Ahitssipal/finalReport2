@@ -168,7 +168,21 @@ else if (rectLoad.contains(Point(x, y)))
 #### 외곽선 검출 (`Contours`)
 
 그림을 그레이스케일로 변환하고 외곽선을 검출하여 검출된 외곽선의 수를 출력합니다.
+```
+else if (rectFeature1.contains(Point(x, y)))
+{
+	Mat gray;
+	cvtColor(based(drawingSpace), gray, COLOR_BGR2GRAY);
+	gray = ~gray;
+	Mat bi;
+	vector<vector<Point>> contours;
+	findContours(gray, contours, RETR_TREE, CHAIN_APPROX_NONE);
+	cout << "외각선의 개수 : " << contours.size() << endl;
+	//imshow("gray", gray);
+}
+```
 
 #### 무게 중심 계산 (`Center`)
 
 가장 큰 외곽선의 무게 중심을 계산하고, 이를 그림 영역의 백분율로 출력합니다.
+```
