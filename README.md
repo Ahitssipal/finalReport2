@@ -24,7 +24,8 @@
 
 ### GUI 레이아웃
 
-```// 그리기 영역
+```
+// 그리기 영역
 Rect rectDrawing(0, 0, 500 + edgeThick * 2, 500 + edgeThick * 2);
 Rect drawingSpace(edgeThick, edgeThick, 500, 500);
 
