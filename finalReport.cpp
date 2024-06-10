@@ -13,18 +13,18 @@ void edgeLine(Mat img);
 void drawText(Mat img, const string text);
 
 
-// ±×¸®±â ¿µ¿ª
+// ê·¸ë¦¬ê¸° ì˜ì—­
 Rect rectDrawing(0, 0, 500 + edgeThick * 2, 500 + edgeThick * 2);
 Rect drawingSpace(edgeThick, edgeThick, 500, 500);
 
-// 1¿­ ¸Ş´º
+// 1ì—´ ë©”ë‰´
 Rect rectSave(500 + edgeThick * 2, 0, 200, 100);
 Rect rectLoad(500 + edgeThick * 2, 100, 200, 100);
 Rect rectClear(500 + edgeThick * 2, 200, 200, 100);
 Rect rectRun(500 + edgeThick * 2, 300, 200, 100 + edgeThick * 2);
 Rect rectExit(500 + edgeThick * 2, 400 + edgeThick * 2, 200, 100);
 
-// 2¿­ ¸Ş´º
+// 2ì—´ ë©”ë‰´
 Rect rectFeature1(500 + 200 + edgeThick * 2, 0, 200, 100);
 Rect rectFeature2(500 + 200 + edgeThick * 2, 100, 200, 100);
 Rect rectFeature3(500 + 200 + edgeThick * 2, 200, 200, 100);
@@ -97,22 +97,22 @@ void on_mouse(int event, int x, int y, int flags, void* userdata)
 		else if (rectSave.contains(Point(x, y)))
 		{
 			string filename;
-			cout << "ÀúÀåÇÒ ÆÄÀÏ¸í ÀÔ·Â : ";
+			cout << "ì €ì¥í•  íŒŒì¼ëª… ì…ë ¥ : ";
 			getline(cin, filename);
 			if (filename == "cancel") break;
 			bool saving = imwrite(filename, based(drawingSpace));
-			if (saving) cout << filename << " ÆÄÀÏÀÌ ÀúÀåµÊ." << endl;
-			else cout << filename << " ÆÄÀÏ ÀúÀå½ÇÆĞ." << endl;
+			if (saving) cout << filename << " íŒŒì¼ì´ ì €ì¥ë¨." << endl;
+			else cout << filename << " íŒŒì¼ ì €ì¥ì‹¤íŒ¨." << endl;
 		}
 		else if (rectLoad.contains(Point(x, y)))
 		{
 			string loadFileName;
-			cout << "ºÒ·¯¿Ã ÆÄÀÏ¸íÀ» ÀÔ·Â : ";
+			cout << "ë¶ˆëŸ¬ì˜¬ íŒŒì¼ëª…ì„ ì…ë ¥ : ";
 			getline(cin, loadFileName);
 			if (loadFileName == "cancel") break;
 			Mat temp = imread(loadFileName, IMREAD_COLOR);
-			if (temp.empty()) cout << loadFileName << " ºÒ·¯¿À±â ½ÇÆĞ." << endl;
-			else cout << loadFileName << " ºÒ·¯¿È." << endl;
+			if (temp.empty()) cout << loadFileName << " ë¶ˆëŸ¬ì˜¤ê¸° ì‹¤íŒ¨." << endl;
+			else cout << loadFileName << " ë¶ˆëŸ¬ì˜´." << endl;
 			temp.copyTo(based(drawingSpace));
 			imshow("numberWindow", based);
 		}
@@ -120,11 +120,11 @@ void on_mouse(int event, int x, int y, int flags, void* userdata)
 		{
 			clearBased->copyTo(based);
 			imshow("numberWindow", based);
-			cout << "ÀÔ·ÂÃ¢ »èÁ¦µÊ." << endl;
+			cout << "ì…ë ¥ì°½ ì‚­ì œë¨." << endl;
 		}
 		else if (rectExit.contains(Point(x, y)))
 		{
-			cout << "ÇÁ·Î±×·¥ Á¾·á" << endl;
+			cout << "í”„ë¡œê·¸ë¨ ì¢…ë£Œ" << endl;
 			destroyAllWindows();
 		}
 		else if (rectFeature1.contains(Point(x, y)))
@@ -135,7 +135,7 @@ void on_mouse(int event, int x, int y, int flags, void* userdata)
 			Mat bi;
 			vector<vector<Point>> contours;
 			findContours(gray, contours, RETR_TREE, CHAIN_APPROX_NONE);
-			cout << "¿Ü°¢¼±ÀÇ °³¼ö : " << contours.size() << endl;
+			cout << "ì™¸ê°ì„ ì˜ ê°œìˆ˜ : " << contours.size() << endl;
 			//imshow("gray", gray);
 		}
 		else if (rectFeature2.contains(Point(x, y)))
@@ -165,7 +165,7 @@ void on_mouse(int event, int x, int y, int flags, void* userdata)
 				}
 				RotatedRect rotated_rect = minAreaRect(contours[largest_contour_index]);
 
-				Point2f vertices[4];    //¿ŞÂÊºÎÅÍ ½Ã°è¹æÇâ
+				Point2f vertices[4];    //ì™¼ìª½ë¶€í„° ì‹œê³„ë°©í–¥
 				rotated_rect.points(vertices);
 				Mat dst;
 				cvtColor(binary, dst, COLOR_GRAY2BGR);
@@ -222,8 +222,8 @@ void on_mouse(int event, int x, int y, int flags, void* userdata)
 						}
 					}
 
-					Rect bounding_box_rotated = boundingRect(rotated_contours[largest_contour_index_rotated]);	//¹Ù¿îµù¹Ú½º ¿µ¿ª
-					//rectangle(rotated, bounding_box_rotated, Scalar(0, 255, 0), 2);	//¹Ù¿îµù¹Ú½º ±×¸®±â
+					Rect bounding_box_rotated = boundingRect(rotated_contours[largest_contour_index_rotated]);	//ë°”ìš´ë”©ë°•ìŠ¤ ì˜ì—­
+					//rectangle(rotated, bounding_box_rotated, Scalar(0, 255, 0), 2);	//ë°”ìš´ë”©ë°•ìŠ¤ ê·¸ë¦¬ê¸°
 
 					//imshow("important", rotated(bounding_box_rotated));
 
@@ -234,81 +234,51 @@ void on_mouse(int event, int x, int y, int flags, void* userdata)
 
 					int white_x = 0;
 					int white_y = 0;
-					int white_total = 0; // ÇÏ¾á»ö ÇÈ¼¿ÀÇ °³¼ö¸¦ ÀúÀåÇÒ º¯¼ö¸¦ Ãß°¡ÇÕ´Ï´Ù.
+					int white_total = 0; // í•˜ì–€ìƒ‰ í”½ì…€ì˜ ê°œìˆ˜ë¥¼ ì €ì¥í•  ë³€ìˆ˜ë¥¼ ì¶”ê°€í•©ë‹ˆë‹¤.
 
-					// ÀÌ¹ÌÁö¸¦ ¼øÈ¸ÇÏ¸ç ÇÏ¾á»ö ÇÈ¼¿ÀÇ ¹«°Ô Áß½ÉÀ» °è»êÇÕ´Ï´Ù.
+					// ì´ë¯¸ì§€ë¥¼ ìˆœíšŒí•˜ë©° í•˜ì–€ìƒ‰ í”½ì…€ì˜ ë¬´ê²Œ ì¤‘ì‹¬ì„ ê³„ì‚°í•©ë‹ˆë‹¤.
 					for (int y = 0; y < cop.rows; y++) {
 						for (int x = 0; x < cop.cols; x++) {
-							if (cop.at<uchar>(y, x) == 255) { // ÇÈ¼¿ °ªÀÌ 255ÀÎ °æ¿ì (ÇÏ¾á»ö)
+							if (cop.at<uchar>(y, x) == 255) { // í”½ì…€ ê°’ì´ 255ì¸ ê²½ìš° (í•˜ì–€ìƒ‰)
 								white_x += x;
 								white_y += y;
-								white_total++; // ÇÏ¾á»ö ÇÈ¼¿ÀÇ °³¼ö¸¦ Áõ°¡½ÃÅµ´Ï´Ù.
+								white_total++; // í•˜ì–€ìƒ‰ í”½ì…€ì˜ ê°œìˆ˜ë¥¼ ì¦ê°€ì‹œí‚µë‹ˆë‹¤.
 							}
 						}
 					}
 
-					// ÇÏ¾á»ö ÇÈ¼¿ÀÌ Á¸ÀçÇÏ´Â °æ¿ì¿¡¸¸ ¹«°Ô Áß½ÉÀ» °è»êÇÕ´Ï´Ù.
+					// í•˜ì–€ìƒ‰ í”½ì…€ì´ ì¡´ì¬í•˜ëŠ” ê²½ìš°ì—ë§Œ ë¬´ê²Œ ì¤‘ì‹¬ì„ ê³„ì‚°í•©ë‹ˆë‹¤.
 					if (white_total > 0) {
-						double mx = static_cast<double>(white_x) / white_total; // ¹«°Ô Áß½É x ÁÂÇ¥¸¦ °è»êÇÕ´Ï´Ù.
-						double my = static_cast<double>(white_y) / white_total; // ¹«°Ô Áß½É y ÁÂÇ¥¸¦ °è»êÇÕ´Ï´Ù.
+						double mx = static_cast<double>(white_x) / white_total; // ë¬´ê²Œ ì¤‘ì‹¬ x ì¢Œí‘œë¥¼ ê³„ì‚°í•©ë‹ˆë‹¤.
+						double my = static_cast<double>(white_y) / white_total; // ë¬´ê²Œ ì¤‘ì‹¬ y ì¢Œí‘œë¥¼ ê³„ì‚°í•©ë‹ˆë‹¤.
 
-						// ¹«°Ô Áß½ÉÀ» ÀÌ¹ÌÁö Å©±â¿¡ ´ëÇÑ ¹éºĞÀ²·Î º¯È¯ÇÕ´Ï´Ù.
+						// ë¬´ê²Œ ì¤‘ì‹¬ì„ ì´ë¯¸ì§€ í¬ê¸°ì— ëŒ€í•œ ë°±ë¶„ìœ¨ë¡œ ë³€í™˜í•©ë‹ˆë‹¤.
 						double per_mx = (mx / cop.cols) * 100.0;
 						double per_my = (my / cop.rows) * 100.0;
 
-						// °á°ú¸¦ Ãâ·ÂÇÕ´Ï´Ù.
-						cout << "¹«°Ô Áß½É ¹éºĞÀ²: (" << per_mx << "%, " << per_my << "%)" << endl;
+						// ê²°ê³¼ë¥¼ ì¶œë ¥í•©ë‹ˆë‹¤.
+						cout << "ë¬´ê²Œ ì¤‘ì‹¬ ë°±ë¶„ìœ¨: (" << per_mx << "%, " << per_my << "%)" << endl;
 
 						if (per_mx > 60)
-							cout << "¿À¸¥ÂÊ";
+							cout << "ì˜¤ë¥¸ìª½";
 						else if (per_mx < 40)
-							cout << "¿ŞÂÊ" ;
-						else cout << "°¡¿îµ¥";
+							cout << "ì™¼ìª½" ;
+						else cout << "ê°€ìš´ë°";
 						if (per_my > 60)
-							cout << ", ¾Æ·¡" << endl;
+							cout << ", ì•„ë˜" << endl;
 						else if (per_my < 40)
-							cout << ", À§" << endl;
+							cout << ", ìœ„" << endl;
 						else cout << endl;
 					}
 					else {
-						cout << "ÇÏ¾á»ö ÇÈ¼¿ÀÌ ¾ø½À´Ï´Ù." << endl; // ÇÏ¾á»ö ÇÈ¼¿ÀÌ ¾ø´Â °æ¿ì ¸Ş½ÃÁö¸¦ Ãâ·ÂÇÕ´Ï´Ù.
+						cout << "í•˜ì–€ìƒ‰ í”½ì…€ì´ ì—†ìŠµë‹ˆë‹¤." << endl; // í•˜ì–€ìƒ‰ í”½ì…€ì´ ì—†ëŠ” ê²½ìš° ë©”ì‹œì§€ë¥¼ ì¶œë ¥í•©ë‹ˆë‹¤.
 					}
 				}
 			}
 		}
 		else if (rectFeature3.contains(Point(x, y)))
 		{
-			Mat gray;
-			cvtColor(based(drawingSpace), gray, COLOR_BGR2GRAY);
-
-			// Canny ¿§Áö °ËÃâ
-			Mat edges;
-			Canny(gray, edges, 50, 150);
-
-			// ÄÁÅõ¾î ÃßÃâ
-			vector<vector<Point>> contours;
-			findContours(edges, contours, RETR_EXTERNAL, CHAIN_APPROX_SIMPLE);
-
-			// ÄÁÅõ¾î ·çÇÁ
-			for (size_t i = 0; i < contours.size(); i++) {
-				// ÄÁÅõ¾î¸¦ µÑ·¯½Î´Â ÃÖ¼Ò »ç°¢Çü
-				RotatedRect boundRect = minAreaRect(contours[i]);
-
-				// ÄÁÅõ¾î ¹æÇâ È®ÀÎ
-				float angle = boundRect.angle;
-				if (boundRect.size.width < boundRect.size.height)
-					angle = 90 + angle;
-
-				// ¹æÇâ °áÁ¤
-				if (angle > -45 && angle <= 45)
-					cout << "¿À¸¥ÂÊ" << endl;
-				else if (angle > 45 && angle <= 135)
-					cout << "¾Æ·¡" << endl;
-				else if (angle > 135 || angle <= -135)
-					cout << "¿ŞÂÊ" << endl;
-				else
-					cout << "À§" << endl;
-			}
+			
 		}
 		break;
 	case EVENT_MOUSEMOVE:
