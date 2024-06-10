@@ -44,24 +44,6 @@ Rect rectFeature3(500 + 200 + edgeThick * 2, 200, 200, 100);
 `Rect` 개체를 사용하여 정의됩니다:
 - `rectDrawing`, `rectSave`, `rectLoad`, `rectClear`, `rectRun`, `rectExit`, `rectFeature1`, `rectFeature2`, `rectFeature3`
 
-### 주요 함수
-
-#### main
-
-창을 초기화하고 콜백 함수를 설정하며 버튼을 그립니다.
-
-#### on_mouse
-
-마우스 이벤트를 처리하여 그리기, 저장, 불러오기, 지우기, 기능 실행 등을 수행합니다.
-
-#### edgeLine
-
-주어진 이미지에 테두리를 그립니다.
-
-#### drawText
-
-주어진 이미지 중앙에 텍스트를 그립니다.
-
 ### 주요 예제 기능
 
 #### 이미지 저장 (`Save`)
