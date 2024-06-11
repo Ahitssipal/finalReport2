@@ -143,21 +143,17 @@ else if (rectFeature2.contains(Point(x, y)))
 
 		//imshow("Bounding Box", dst);
 
-		// Calculate the slope (angle) using vertices[0] and vertices[1]
 		float dx = vertices[1].x - vertices[0].x;
 		float dy = vertices[1].y - vertices[0].y;
 		float angle = atan2(dy, dx) * 180.0 / CV_PI;
 
-		// Normalize the angle to be within 0 to 180 degrees
 		if (angle < -45) {
 			angle += 90;
 			swap(rotated_rect.size.width, rotated_rect.size.height);
 		}
 
-		// Get the rotation matrix
 		Mat M = getRotationMatrix2D(rotated_rect.center, angle, 1.0);
 
-		// Rotate the image
 		Mat rotated;
 		warpAffine(based(drawingSpace), rotated, M, based(drawingSpace).size(), INTER_CUBIC, BORDER_REFLECT);
 
@@ -196,6 +192,7 @@ else if (rectFeature2.contains(Point(x, y)))
 			cvtColor(rotated(bounding_box_rotated), cop, COLOR_BGR2GRAY);
 			cop = ~cop;
 
+			//픽셀값이 255인 픽셀의 좌표 수집
 			int white_x = 0;
 			int white_y = 0;
 			int white_total = 0;
